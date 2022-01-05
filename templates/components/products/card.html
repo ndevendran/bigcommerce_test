@@ -78,6 +78,15 @@
 
         <figcaption class="card-figcaption">
             <div class="card-figcaption-body">
+              <div class="card-img-container card-hover">
+                  {{> components/common/responsive-img
+                      image=product.images.[1]
+                      class="card-image"
+                      fallback_size=theme_settings.productgallery_size
+                      lazyload=theme_settings.lazyload_mode
+                      default_image=theme_settings.default_image_product
+                  }}
+              </div>
                 {{#unless hide_product_quick_view}}
                     {{#if theme_settings.show_product_quick_view}}
                         {{#if settings.data_tag_enabled}}
@@ -140,5 +149,17 @@
             {{/or}}
         </div>
         {{> components/products/bulk-discount-rates}}
+    </div>
+    <div>
+      <!-- {{#each product.images}}
+        <div>
+          <div>Index?: {{@key}}</div>
+          {{#each this}}
+            <div>Key: {{@key}} Value: {{this}}</div>
+          {{/each}}
+        </div>
+      {{/each}} -->
+      <div>{{product.images.[1].data}}</div>
+      <div>{{product.category}}</div>
     </div>
 </article>
