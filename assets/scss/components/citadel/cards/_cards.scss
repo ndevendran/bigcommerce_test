@@ -49,10 +49,6 @@
     max-width: get-width(stencilString("productgallery_size"));
 }
 
-.card-hover {
-  z-index: 3;
-}
-
 .card-figcaption {
     display: none;
     margin: $card-figcaption-margin;
