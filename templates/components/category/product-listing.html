@@ -4,7 +4,7 @@
 {{#if category.products}}
     {{> components/products/filter sort=pagination.category.sort}}
     {{#if (if category.name '==' 'Special Items' )}}
-    <span href="" class="button button-primary" onclick="testFunction()">Add All Items to Cart</span>
+    <span href="" class="button button-primary" onclick="addAllToCart()">{{lang 'categories.add_all_to_cart'}}</span>
     {{/if}}
     <form action="{{urls.compare}}" method='POST' {{#if settings.data_tag_enabled}} data-list-name="Category: {{category.name}}" {{/if}} data-product-compare>
         {{#if theme_settings.product_list_display_mode '===' 'grid'}}
@@ -38,7 +38,7 @@
 {{/if}}
 <script>
   var jsContext = JSON.parse({{jsContext}});
-  function testFunction() {
+  function addAllToCart() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", jsContext.products[0]['add_to_cart_url']);
     xmlHttp.send(null);
