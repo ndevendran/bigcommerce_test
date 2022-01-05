@@ -151,7 +151,7 @@
         {{> components/products/bulk-discount-rates}}
     </div>
     <div>
-      <!-- {{#each product.images}}
+      <!-- {{#each product}}
         <div>
           <div>Index?: {{@key}}</div>
           {{#each this}}
@@ -159,7 +159,6 @@
           {{/each}}
         </div>
       {{/each}} -->
-      <div>{{product.images.[1].data}}</div>
-      <div>{{product.category}}</div>
+      <div>{{product.[add_to_cart_url]}}</div>
     </div>
 </article>
