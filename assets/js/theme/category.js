@@ -3,6 +3,7 @@ import utils from '@bigcommerce/stencil-utils';
 import CatalogPage from './catalog';
 import compareProducts from './global/compare-products';
 import FacetedSearch from './common/faceted-search';
+import { defaultModal, ModalEvents } from './global/modal';
 import { createTranslationDictionary } from '../theme/common/utils/translations-utils';
 
 export default class Category extends CatalogPage {
@@ -30,6 +31,13 @@ export default class Category extends CatalogPage {
 
     onReady() {
         this.arrangeFocusOnSortBy();
+        const modal = defaultModal();
+        this.$modal = $('#modal');
+        modal.open();
+        modal.updateContent(
+          '<div class="modal-body" style="margin:auto"><p style="height:100%; font-size:2.5rem"; margin:auto;>'
+          + 'testing</p>'
+          +'<button class="button button-primary" style="margin:auto">OK</button></div>');
 
         $('[data-button-type="add-cart"]').on('click', (e) => this.setLiveRegionAttributes($(e.currentTarget).next(), 'status', 'polite'));
 
