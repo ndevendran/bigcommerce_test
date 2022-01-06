@@ -4,14 +4,6 @@
 
 {{#if category.products}}
     {{> components/products/filter sort=pagination.category.sort}}
-    {{#if (if category.name '==' 'Special Items' )}}
-    <a class="button button-primary" onclick="addAllToCart()">{{lang 'categories.add_all_to_cart'}}</a>
-    {{#if cart }}
-    {{#if (if cart.items.length '>' 0)}}
-    <a href="" class="button button-primary" onclick="removeAllFromCart()">Remove All Items</a>
-    {{/if}}
-    {{/if}}
-    {{/if}}
     <form action="{{urls.compare}}" method='POST' {{#if settings.data_tag_enabled}} data-list-name="Category: {{category.name}}" {{/if}} data-product-compare>
         {{#if theme_settings.product_list_display_mode '===' 'grid'}}
             {{#if settings.data_tag_enabled}}
@@ -42,33 +34,3 @@
         </p>
     {{/if}}
 {{/if}}
-<script>
-  var jsContext = JSON.parse({{jsContext}});
-
-  function getCart(){
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", '/api/storefront/carts', false);
-    xmlHttp.send(null);
-    cartData = JSON.parse(xmlHttp.response)[0];
-  }
-
-  function addAllToCart() {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", jsContext.products[0]['add_to_cart_url']);
-    xmlHttp.onload = function() {
-      window.location.reload(true);
-    }
-    xmlHttp.send(null);
-  }
-
-  function removeAllFromCart() {
-    if(jsContext.cartId){
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("DELETE", '/api/storefront/carts/'+jsContext.cartId)
-      xmlHttp.onload = function() {
-
-      }
-      xmlHttp.send(null);
-    }
-  }
-</script>
