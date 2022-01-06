@@ -3,7 +3,7 @@ import utils from '@bigcommerce/stencil-utils';
 import CatalogPage from './catalog';
 import compareProducts from './global/compare-products';
 import FacetedSearch from './common/faceted-search';
-import { defaultModal, ModalEvents } from './global/modal';
+import { defaultModal, modalFactory, ModalEvents } from './global/modal';
 import { createTranslationDictionary } from '../theme/common/utils/translations-utils';
 
 export default class Category extends CatalogPage {
@@ -31,13 +31,6 @@ export default class Category extends CatalogPage {
 
     onReady() {
         this.arrangeFocusOnSortBy();
-        const modal = defaultModal();
-        this.$modal = $('#modal');
-        modal.open();
-        modal.updateContent(
-          '<div class="modal-body" style="margin:auto"><p style="height:100%; font-size:2.5rem"; margin:auto;>'
-          + 'testing</p>'
-          +'<button class="button button-primary" style="margin:auto">OK</button></div>');
 
         $('[data-button-type="add-cart"]').on('click', (e) => this.setLiveRegionAttributes($(e.currentTarget).next(), 'status', 'polite'));
 
@@ -77,9 +70,26 @@ export default class Category extends CatalogPage {
 
           xmlHttp.open("DELETE", '/api/storefront/carts/'+this.context.cartId)
           xmlHttp.onload = function() {
+            const modal = defaultModal();
+            this.$modal = $('#modal');
+            this.$modal.one(ModalEvents.close, () => {
+              window.location.reload();
+            });
+            modal.open();
 
+            modal.updateContent(
+              '<div class="modal-body" style="width: 50%; margin:auto; text-align:center"><p style="font-size:2.5rem"; margin-left:50%;>'
+              + 'All items have been removed from your cart</p>'
+              +'<div style="width:50%; margin:auto"><button class="button button-primary" data-special-item-modal style="margin:auto"'
+              +'>'
+              +'OK</button></div></div>');
+
+            $('[data-special-item-modal]').on('click', event => {
+              modal.close();
+            });
           }
           xmlHttp.send(null);
+          this.context.cartId = null;
         }
       })
     }
