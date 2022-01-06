@@ -1,4 +1,5 @@
 import { hooks } from '@bigcommerce/stencil-utils';
+import utils from '@bigcommerce/stencil-utils';
 import CatalogPage from './catalog';
 import compareProducts from './global/compare-products';
 import FacetedSearch from './common/faceted-search';
@@ -46,6 +47,33 @@ export default class Category extends CatalogPage {
         $('a.reset-btn').on('click', () => this.setLiveRegionsAttributes($('span.reset-message'), 'status', 'polite'));
 
         this.ariaNotifyNoProducts();
+        this.onAddAllItemsToCart();
+        this.onRemoveAllItemsFromCart();
+    }
+
+    onAddAllItemsToCart() {
+      $('[data-cart-all-add]').on('click', event => {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("POST", this.context.products[0]['add_to_cart_url']);
+        xmlHttp.onload = function() {
+
+        }
+        xmlHttp.send(null);
+      });
+    }
+
+    onRemoveAllItemsFromCart() {
+      $('[data-cart-all-remove]').on('click', event => {
+        if(this.context.cartId){
+          var xmlHttp = new XMLHttpRequest();
+
+          xmlHttp.open("DELETE", '/api/storefront/carts/'+this.context.cartId)
+          xmlHttp.onload = function() {
+
+          }
+          xmlHttp.send(null);
+        }
+      })
     }
 
     ariaNotifyNoProducts() {
