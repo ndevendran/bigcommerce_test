@@ -75,12 +75,14 @@ export default class Category extends CatalogPage {
             this.$modal.one(ModalEvents.close, () => {
               window.location.reload();
             });
+            this.$modal.css("height", "25%");
+            this.$modal.css("width", "25%");
             modal.open();
 
             modal.updateContent(
-              '<div class="modal-body" style="width: 50%; margin:auto; text-align:center"><p style="font-size:2.5rem"; margin-left:50%;>'
+              '<div class="modal-body" style="text-align:center; padding-top: 20%"><p>'
               + 'All items have been removed from your cart</p>'
-              +'<div style="width:50%; margin:auto"><button class="button button-primary" data-special-item-modal style="margin:auto"'
+              +'<div><button class="button button-primary" data-special-item-modal style="margin:auto"'
               +'>'
               +'OK</button></div></div>');
 
