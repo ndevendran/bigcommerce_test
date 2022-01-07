@@ -1,4 +1,4 @@
-Cornerstone Update Them Test:
+Cornerstone Test:
 
 I cloned the Cornerstone theme repo and performed the following steps to make the required changes.
 
