@@ -48,6 +48,12 @@ category:
             </aside>
         {{/if}}
     {{/if}}
+    <div class="banners">
+      <span class="banner">Name: {{customer.[name]}}</span>
+      <span class="banner">Email: {{customer.[email]}}</span>
+      <span class="banner">Phone: {{customer.[phone]}}</span>
+    </div>
+    <br />
     {{#if (if category.name '==' 'Special Items' )}}
     <a href="" class="button button-primary" data-cart-all-add>{{lang 'categories.add_all_to_cart'}}</a>
     {{#if cart }}

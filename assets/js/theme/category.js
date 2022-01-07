@@ -80,7 +80,7 @@ export default class Category extends CatalogPage {
             modal.open();
 
             modal.updateContent(
-              '<div class="modal-body" style="text-align:center; padding-top: 20%"><p>'
+              '<div class="modal-body" style="text-align:center; padding-top: 20%"><p style="font-weight:bold">'
               + 'All items have been removed from your cart</p>'
               +'<div><button class="button button-primary" data-special-item-modal style="margin:auto"'
               +'>'
