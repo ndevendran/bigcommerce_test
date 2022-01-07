@@ -52,46 +52,47 @@ export default class Category extends CatalogPage {
     }
 
     onAddAllItemsToCart() {
-      $('[data-cart-all-add]').on('click', () => {
-        const xmlHttp = new XMLHttpRequest();
-        xmlHttp.open('POST', this.context.products[0]['add_to_cart_url']);
-        xmlHttp.onload = function () {
+        $('[data-cart-all-add]').on('click', () => {
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.open('POST', this.context.products[0].add_to_cart_url);
+            xmlHttp.onload = function () {
 
-        };
-        xmlHttp.send(null);
-      });
+            };
+            xmlHttp.send(null);
+        });
     }
 
     onRemoveAllItemsFromCart() {
-      $('[data-cart-all-remove]').on('click', () => {
-        if (this.context.cartId) {
-          const xmlHttp = new XMLHttpRequest();
-          xmlHttp.open('DELETE', '/api/storefront/carts/' + this.context.cartId);
-          xmlHttp.onload = function () {
-            const modal = defaultModal();
-            this.$modal = $('#modal');
-            this.$modal.one(ModalEvents.close, () => {
-              window.location.reload();
-            });
-            this.$modal.css('height', '25%');
-            this.$modal.css('width', '25%');
-            modal.open();
+        $('[data-cart-all-remove]').on('click', () => {
+            if (this.context.cartId) {
+                const xmlHttp = new XMLHttpRequest();
+                const url = `/api/storefront/carts/${this.context.cartId}`;
+                xmlHttp.open('DELETE', url);
+                xmlHttp.onload = function () {
+                    const modal = defaultModal();
+                    this.$modal = $('#modal');
+                    this.$modal.one(ModalEvents.close, () => {
+                        window.location.reload();
+                    });
+                    this.$modal.css('height', '25%');
+                    this.$modal.css('width', '25%');
+                    modal.open();
 
-            modal.updateContent('<div class="modal-body" style="text-align:center; padding-top: 20%">'
-              + '<p style="font-weight:bold">'
-              + 'All items have been removed from your cart</p>'
-              + '<div><button class="button button-primary" data-special-item-modal style="margin:auto"'
-              + '>'
-              + 'OK</button></div></div>');
+                    modal.updateContent('<div class="modal-body" style="text-align:center; padding-top: 20%">'
+                  + '<p style="font-weight:bold">'
+                  + 'All items have been removed from your cart</p>'
+                  + '<div><button class="button button-primary" data-special-item-modal style="margin:auto"'
+                  + '>'
+                  + 'OK</button></div></div>');
 
-            $('[data-special-item-modal]').on('click', () => {
-              modal.close();
-            });
-          };
-          xmlHttp.send(null);
-          this.context.cartId = null;
-        }
-      });
+                    $('[data-special-item-modal]').on('click', () => {
+                        modal.close();
+                    });
+                };
+                xmlHttp.send(null);
+                this.context.cartId = null;
+            }
+        });
     }
 
     ariaNotifyNoProducts() {
