@@ -1,6 +1,6 @@
 Cornerstone Test:
 
-I cloned the Cornerstone theme repo and performed the following steps to make the required changes.
+I cloned the Cornerstone theme repo and performed the following steps to make the required changes.<br />
 
 1)First I created the secondary image on hover. I found the secondary image's url in the product object. I put it under the figcaption class so it could inherit on hover and gave it the appropriate card classes so it could cover the original image.
 2)Second I added the "Add All To Cart" button. I originally used the front work to pass the cart object into the template and then used inline scripts to make manual calls to the Storefront API with the cartId and the Product ID. I did the same with the "Remove All From Cart". I opted to delete the entire cart instead of removing the items one line at a time because it was simpler. There was a bug that caused the Remove button to fail because a call to getCart was made for a deleted cart.
