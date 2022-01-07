@@ -56,7 +56,7 @@ export default class Category extends CatalogPage {
             const xmlHttp = new XMLHttpRequest();
             xmlHttp.open('POST', this.context.products[0].add_to_cart_url);
             xmlHttp.onload = function () {
-
+                window.location.reload(true);
             };
             xmlHttp.send(null);
         });
@@ -72,7 +72,7 @@ export default class Category extends CatalogPage {
                     const modal = defaultModal();
                     this.$modal = $('#modal');
                     this.$modal.one(ModalEvents.close, () => {
-                        window.location.reload();
+                        window.location.reload(true);
                     });
                     this.$modal.css('height', '25%');
                     this.$modal.css('width', '25%');
