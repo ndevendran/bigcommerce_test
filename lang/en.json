@@ -32,7 +32,8 @@
     },
     "categories": {
         "no_products": "There are no products listed under this category.",
-        "add_all_to_cart": "Add All To Cart"
+        "add_all_to_cart": "Add All To Cart",
+        "remove_all_from_cart": "Remove All From Cart"
     },
     "checkout": {
         "title": "Checkout"
